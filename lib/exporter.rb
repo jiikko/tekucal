@@ -2,16 +2,16 @@ class Exporter
   include Capybara::DSL
 
   def initialize(config)
-    Capybara.visit(config["login_url"])
-    Capybara.fill_in(:session_email, with: config["email"])
-    Capybara.fill_in(:session_password, with: config["password"])
-    Capybara.click_button "ログインする"
+    visit(config["login_url"])
+    fill_in(:session_email, with: config["email"])
+    fill_in(:session_password, with: config["password"])
+    click_button "ログインする"
     @schedule_list = []
   end
 
   def run
-    Capybara.visit File.join([Capybara.current_host, '/mentor/schedule'])
-    Capybara.click_link "確定シフト一覧"
+    visit File.join([current_host, '/mentor/schedule'])
+    click_link "確定シフト一覧"
     run_suhuto
     run_mentoring
     data = @schedule_list.join("\n")
@@ -24,9 +24,11 @@ class Exporter
   def run_mentoring
     current_date = today
     5.times do
-      Capybara.visit File.join([Capybara.current_host, 
-                                "/mentor/schedule/appointments/#{current_date.year}/#{current_date.month}"])
-      list = Capybara.find_all("table tbody tr")
+      visit File.join([
+        current_host,
+        "/mentor/schedule/appointments/#{current_date.year}/#{current_date.month}",
+      ])
+      list = find_all("table tbody tr")
       puts "今月(#{current_date.year}/#{current_date.month})は#{list.size}件のメンタリングがあります"
       list.each do |tr|
         td_list = tr.find_all("td").map { |x| x.text }
@@ -40,7 +42,7 @@ class Exporter
   end
 
   def run_suhuto
-    list = Capybara.find_all("table tbody tr")
+    list = find_all("table tbody tr")
     puts "今月(#{today.year}/#{today.month})は#{list.size}件のシフトがあります"
     list.each do |tr|
       td_list = tr.find_all("td").map { |x| x.text }

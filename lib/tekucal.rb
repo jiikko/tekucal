@@ -2,7 +2,7 @@ require 'yaml'
 require 'capybara/dsl'
 require 'pry'
 
-module Browser
+module Tekucal
   CONDFIG_FILE = 'config.yml'
 
   def self.run

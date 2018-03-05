@@ -1,10 +1,9 @@
 require 'icalendar'
-require './lib/browser'
+require './lib/tekucal'
 require './lib/exporter'
 
 
-
-Browser.run
+Tekucal.run
 
 __END__
 
