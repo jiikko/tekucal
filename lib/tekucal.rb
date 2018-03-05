@@ -4,12 +4,19 @@ require 'pry'
 
 module Tekucal
   CONDFIG_FILE = 'config.yml'
+  SCHEDULE_FILE = "schedule.csv"
 
   def self.run
     load_config
     browser_init
     exporter = Exporter.new(@config)
     csv = exporter.run
+    File.write('ical.csv', to_ical_csv(csv))
+  end
+
+
+  def self.to_ical_csv(csv)
+    'test'
   end
 
   private

@@ -15,7 +15,7 @@ class Exporter
     run_suhuto
     run_mentoring
     data = @schedule_list.join("\n")
-    File.write("schedule.csv", data)
+    File.write(Tekucal::SCHEDULE_FILE, data)
     data
   end
 
