@@ -5,6 +5,11 @@
 ```
 brew install geckodriver
 brew cask install firefiox
+bundle install
+```
+```
+cp config.sample.yml config.yml
+edit config.yml
 ```
 
 # 実行方法
