@@ -1,6 +1,8 @@
 require 'yaml'
 require 'capybara/dsl'
 require 'pry'
+require 'tekucal/convert_to_ical'
+require 'tekucal/loader'
 
 module Tekucal
   CONDFIG_FILE = 'config.yml'
@@ -11,12 +13,12 @@ module Tekucal
     browser_init
     exporter = Exporter.new(@config)
     csv = exporter.run
-    File.write('ical.csv', to_ical_csv(csv))
+    File.write('schedule.csv', to_ical_csv(csv))
   end
 
 
   def self.to_ical_csv(csv)
-    'test'
+    csv
   end
 
   private
