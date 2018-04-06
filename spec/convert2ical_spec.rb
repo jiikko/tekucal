@@ -8,6 +8,9 @@ describe Tekucal::Convert2Ical do
       year = Date.today.year
       expect(dates.first).to eq(Time.new(year, 4, 7, 15, 00, 00))
       expect(dates.last).to eq(Time.new(year, 4, 7, 19, 00, 00))
+      dates = Tekucal::Event::Struct.parse_datetimes('4/1 (日)21:00~21:30,モニタリング')
+      expect(dates.first).to eq(Time.new(year, 4, 1, 21, 00, 00))
+      expect(dates.last).to eq(Time.new(year, 4, 1, 21, 30, 00))
     end
   end
   it 'tes t' do

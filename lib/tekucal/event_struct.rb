@@ -2,7 +2,7 @@ module Tekucal
   module Event
     class Struct
       def self.parse_datetimes(formated_datetime)
-        %r!(\d+?)/(\d+?) ?\(.\) ? (\d\d:\d\d)[~〜](\d\d:\d\d)! =~ formated_datetime
+        %r!(\d+?)/(\d+?) ?\(.\) ?(\d\d:\d\d)[~〜](\d\d:\d\d)! =~ formated_datetime
         year = Date.today.year
         month = $1
         day = $2
