@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'tempfile'
 
-describe Tekucal::VEVENT do
+describe Tekucal::Loader do
   describe '#load' do
     it '' do
       ical_body = <<~EOH

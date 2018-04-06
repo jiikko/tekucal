@@ -1,8 +1,10 @@
 require 'yaml'
 require 'capybara/dsl'
 require 'pry'
-require 'tekucal/convert_to_ical'
-require 'tekucal/loader'
+require './lib/tekucal/convert2ical'
+require './lib/tekucal/loader'
+require './lib/tekucal/exporter'
+require './lib/tekucal/event_struct'
 
 module Tekucal
   CONDFIG_FILE = 'config.yml'
@@ -13,7 +15,7 @@ module Tekucal
     browser_init
     exporter = Exporter.new(@config)
     csv = exporter.run
-    File.write('schedule.csv', to_ical_csv(csv))
+    File.write(SCHEDULE_FILE, to_ical_csv(csv))
   end
 
 

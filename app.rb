@@ -1,4 +1,4 @@
 require 'icalendar'
-require 'tekucal'
+require './lib/tekucal'
 
 Tekucal.run

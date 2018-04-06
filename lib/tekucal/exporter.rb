@@ -3,6 +3,7 @@ module Tekucal
     include Capybara::DSL
 
     def initialize(config)
+      puts 'starting'
       visit(config["login_url"])
       fill_in(:session_email, with: config["email"])
       fill_in(:session_password, with: config["password"])
@@ -32,11 +33,11 @@ module Tekucal
         list = find_all("table tbody tr")
         puts "今月(#{current_date.year}/#{current_date.month})は#{list.size}件のメンタリングがあります"
         list.each do |tr|
-          td_list = tr.find_all("td").map { |x| x.text }
+          td_list = tr.find_all("td").map { |x| x.text.sub(/\n/m, '') }
           next if td_list.empty?
           date_with_range = td_list[0]
           mentie_name = td_list[1]
-          @schedule_list << [date_with_range, mentie_name, "メンタリング"].join(",")
+          @schedule_list << [date_with_range, "#{mentie_name} / メンタリング"].join(",")
         end
         current_date = current_date.next_month
       end
@@ -50,7 +51,7 @@ module Tekucal
         next if td_list.empty?
         date = td_list[0]
         time_range = td_list[1]
-        @schedule_list << [date, time_range, "シフト"].join(",")
+        @schedule_list << ["#{date} #{time_range}", "チャットサポート"].join(",")
       end
     end
 
