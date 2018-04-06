@@ -1,3 +1,5 @@
+require 'digest/sha1'
+
 module Tekucal
   module Event
     class Struct
@@ -19,29 +21,58 @@ module Tekucal
         ]
       end
 
-      def initialize(line)
+      def initialize(line, now = nil)
         l = line.split(',')
-        set_datetimes(l[0])
-        @title = l[1]
+        datetimes = self.class.parse_datetimes(l[0])
+        @start_at = datetimes[0]
+        @end_at = datetimes[1]
+        @title = l[1].strip
+        @now = now ||= Time.now
       end
 
       def to_s
         <<~EOH
 BEGIN:VEVENT
-DTSTART:20180407T010000Z
-DTEND:20180407T030000Z
-DTSTAMP:20180406T140049Z
-UID:5@google.com
-CREATED:20180406T140022Z
+DTSTART:#{start_at}
+DTEND:#{end_at}
+DTSTAMP:#{now}
+UID:#{uid}
+CREATED:#{now}
 DESCRIPTION:
-LAST-MODIFIED:20180406T140022Z
+LAST-MODIFIED:#{now}
 LOCATION:
 SEQUENCE:0
 STATUS:CONFIRMED
-SUMMARY:テストですのんほいパーク2
+SUMMARY:#{summary}
 TRANSP:OPAQUE
 END:VEVENT
         EOH
+      end
+
+      def summary
+        @title
+      end
+
+      def uid
+        [ Digest::SHA1.hexdigest([summary, start_at.to_s].join),
+          '@google.com',
+        ].join
+      end
+
+      def start_at
+        formatter(@start_at)
+      end
+
+      def end_at
+        formatter(@end_at)
+      end
+
+      def now
+        formatter(Time.now)
+      end
+
+      def formatter(time)
+        time.strftime('%Y%m%dT%H%M%SZ')
       end
     end
   end
