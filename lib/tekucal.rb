@@ -15,12 +15,9 @@ module Tekucal
     browser_init
     exporter = Exporter.new(@config)
     csv = exporter.run
-    File.write(SCHEDULE_FILE, to_ical_csv(csv))
-  end
-
-
-  def self.to_ical_csv(csv)
-    csv
+    File.write(SCHEDULE_FILE, csv)
+    ical = Tekucal::Convert2Ical.new.convert_with_header(File.open(SCHEDULE_FILE))
+    File.write('ical.csv', ical)
   end
 
   private

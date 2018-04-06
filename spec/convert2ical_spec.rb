@@ -14,6 +14,7 @@ describe Tekucal::Convert2Ical do
       expect(dates.last).to eq(Time.new(year, 4, 1, 21, 30, 00))
     end
   end
+
   describe '#convert' do
     it 'be success' do
       file = Tempfile.new

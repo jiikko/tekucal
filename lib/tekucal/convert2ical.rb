@@ -9,5 +9,19 @@ module Tekucal
         Event::Struct.new(line).to_s
       }.join
     end
+
+    def convert_with_header(file)
+      <<~EOH
+BEGIN:VCALENDAR
+PRODID:-//Google Inc//Google Calendar 70.9054//EN
+VERSION:2.0
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:インポート用カレンダー
+X-WR-TIMEZONE:Asia/Tokyo
+#{convert(file)}
+END:VCALENDAR
+      EOH
+    end
   end
 end
