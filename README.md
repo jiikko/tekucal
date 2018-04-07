@@ -16,6 +16,11 @@ edit config.yml
 
 # 実行方法
 ```
-bundle exec ruby app.rb
+bundle exec ./bin/run
 cat schedule.ical
 ```
+
+* ブラウザが某システムにログインしてスケジュールをcsvを書き出す
+* 書き出したcsvをical形式に変換する
+
+ということを `./bin/run` がやります

@@ -1,4 +1,5 @@
-require 'icalendar'
+#!/usr/bin/env ruby
+
 require './lib/tekucal'
 
 Tekucal.run
