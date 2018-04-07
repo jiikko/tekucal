@@ -43,7 +43,7 @@ LAST-MODIFIED:#{now}
 LOCATION:
 SEQUENCE:0
 STATUS:CONFIRMED
-SUMMARY:#{summary}
+SUMMARY:[テクアカ] #{summary}
 TRANSP:OPAQUE
 END:VEVENT
         EOH
@@ -72,7 +72,7 @@ END:VEVENT
       end
 
       def formatter(time)
-        time.strftime('%Y%m%dT%H%M%SZ')
+        time.strftime('%Y%m%dT%H%M%SZ+0900')
       end
     end
   end

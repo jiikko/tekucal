@@ -1,5 +1,11 @@
 module Tekucal
   class Convert2Ical
+    def run
+      data = convert_with_header(SCHEDULE_FILE)
+      File.write(ICAL_FILE, data)
+      true
+    end
+
     def line_convert(line, now = nil)
       Event::Struct.new(line, now).to_s
     end

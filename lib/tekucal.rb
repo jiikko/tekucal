@@ -9,15 +9,13 @@ require './lib/tekucal/event_struct'
 module Tekucal
   CONDFIG_FILE = 'config.yml'
   SCHEDULE_FILE = "schedule.csv"
+  ICAL_FILE = "schedule.ical"
 
   def self.run
     load_config
     browser_init
-    exporter = Exporter.new(@config)
-    csv = exporter.run
-    File.write(SCHEDULE_FILE, csv)
-    ical = Tekucal::Convert2Ical.new.convert_with_header(File.open(SCHEDULE_FILE))
-    File.write('ical.csv', ical)
+    Exporter.new(@config).run
+    Convert2Ical.new.run
   end
 
   private

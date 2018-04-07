@@ -18,7 +18,7 @@ module Tekucal
       run_mentoring
       data = @schedule_list.join("\n")
       File.write(Tekucal::SCHEDULE_FILE, data)
-      data
+      true
     end
 
     private
