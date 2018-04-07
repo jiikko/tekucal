@@ -36,17 +36,17 @@ describe Tekucal::Convert2Ical do
       now = Time.now
       expect(converter.line_convert(line, now)).to eq(<<~EOH)
 BEGIN:VEVENT
-DTSTART:20180407T150000Z
-DTEND:20180407T190000Z
-DTSTAMP:#{now.strftime('%Y%m%dT%H%M%SZ')}
-UID:976fdc2c58c677c63e03a2389be1deb0c5ece07a@google.com
-CREATED:#{now.strftime('%Y%m%dT%H%M%SZ')}
+DTSTART:20180407T150000Z+0900
+DTEND:20180407T190000Z+0900
+DTSTAMP:#{now.strftime('%Y%m%dT%H%M%SZ+0900')}
+UID:7e39ea4c14c8f4c7adf8770a44a96affd0c4bddc@google.com
+CREATED:#{now.strftime('%Y%m%dT%H%M%SZ+0900')}
 DESCRIPTION:
-LAST-MODIFIED:#{now.strftime('%Y%m%dT%H%M%SZ')}
+LAST-MODIFIED:#{now.strftime('%Y%m%dT%H%M%SZ+0900')}
 LOCATION:
 SEQUENCE:0
 STATUS:CONFIRMED
-SUMMARY:シフト
+SUMMARY:[テクアカ] シフト
 TRANSP:OPAQUE
 END:VEVENT
       EOH
