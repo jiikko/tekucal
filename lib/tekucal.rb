@@ -1,7 +1,7 @@
 require 'yaml'
 require 'capybara/dsl'
 require 'pry'
-require './lib/tekucal/convert2ical'
+require './lib/tekucal/csv2ical'
 require './lib/tekucal/exporter'
 require './lib/tekucal/event_struct'
 
@@ -14,7 +14,7 @@ module Tekucal
     load_config
     browser_init
     Exporter.new(@config).run
-    Convert2Ical.new.run
+    Csv2Ical.new.run
   end
 
   private

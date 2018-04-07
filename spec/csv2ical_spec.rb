@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'date'
 require 'tempfile'
 
-describe Tekucal::Convert2Ical do
+describe Tekucal::Csv2Ical do
   describe '.parse_datetimes' do
     it '日付を返すこと' do
       dates = Tekucal::Event::Struct.parse_datetimes('4/7 (土) 15:00〜19:00')
@@ -24,7 +24,7 @@ describe Tekucal::Convert2Ical do
 4/1 (日)21:00~21:30,ポッキー
       EOH
       file.write(schedule) && file.seek(0)
-      converter = Tekucal::Convert2Ical.new
+      converter = Tekucal::Csv2Ical.new
       expect(converter.convert(file)).to be_a(String) # 手抜き
     end
   end
@@ -32,7 +32,7 @@ describe Tekucal::Convert2Ical do
   describe '#line_convert' do
     it 'be success' do
       line = '4/7 (土)15:00〜19:00,シフト'
-      converter = Tekucal::Convert2Ical.new
+      converter = Tekucal::Csv2Ical.new
       now = Time.now
       expect(converter.line_convert(line, now)).to eq(<<~EOH)
 BEGIN:VEVENT

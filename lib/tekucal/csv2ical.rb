@@ -1,5 +1,5 @@
 module Tekucal
-  class Convert2Ical
+  class Csv2Ical
     def run
       data = convert_with_header(SCHEDULE_FILE)
       File.write(ICAL_FILE, data)
