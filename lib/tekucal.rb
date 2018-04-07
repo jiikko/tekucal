@@ -2,7 +2,6 @@ require 'yaml'
 require 'capybara/dsl'
 require 'pry'
 require './lib/tekucal/convert2ical'
-require './lib/tekucal/loader'
 require './lib/tekucal/exporter'
 require './lib/tekucal/event_struct'
 
