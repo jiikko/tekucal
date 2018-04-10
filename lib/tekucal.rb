@@ -38,6 +38,6 @@ module Tekucal
       })
     end
     Capybara.current_driver = browser_name
+    Capybara.reset_sessions!
   end
-  Capybara.reset_sessions!
 end
